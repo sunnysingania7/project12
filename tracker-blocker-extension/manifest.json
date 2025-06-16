@@ -4,23 +4,31 @@
     "version": "1.0",
     "description": "Blocks known tracking scripts for better privacy.",
     "permissions": [
-        "webRequest",
-        "webRequestBlocking",
-        "storage",
-        "declarativeNetRequest"
+        "declarativeNetRequest",
+        "declarativeNetRequestWithHostAccess",
+        "storage"
     ],
     "host_permissions": [
         "<all_urls>"
     ],
-    "background": {
-        "service_worker": "background.js"
-    },
-    "action": {
+     "action": {
         "default_popup": "popup.html",
         "default_icon": {
             "48": "icons/icon48.png"
         },
-        "default_title": "Tracker Blocker"
+        "default_title":"Tracker Blocker"
+    },
+    "background": {
+        "service_worker": "background.js"
+    },
+     "declarative_net_request": {
+        "rule_resources": [
+            {
+                "id": "blockTrackers",
+                "enabled": true,
+                "path": "data/rules.json"
+            }
+        ]
     }, 
     "icons": {
         "48": "icons/icon48.png"
