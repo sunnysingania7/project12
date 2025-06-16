@@ -1,3 +1,3 @@
 // popup.js
 
-document.getElementById("status").textContent = "Extension is active";
+document.getElementById("status").textContent = "No trackers allowed 🚫";
