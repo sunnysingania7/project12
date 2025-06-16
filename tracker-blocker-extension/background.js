@@ -9,7 +9,7 @@ fetch('data/trackers.json')
     .then(data => {
         trackerDomains = data.map(domain => `*://*.${domain}/*`);
 
-        chrome.webRequest.onBeForeRequest.addListener(
+        chrome.webRequest.onBeforeRequest.addListener(
             function(details) {
                 blockedCount++;
                 chrome.action.setBadgeText({ text: blockedCount.toString() });
