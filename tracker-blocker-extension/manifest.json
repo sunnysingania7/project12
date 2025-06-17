@@ -6,6 +6,8 @@
     "permissions": [
         "declarativeNetRequest",
         "declarativeNetRequestWithHostAccess",
+        "declarativeNetRequestFeedback",
+        "activeTab",
         "storage"
     ],
     "host_permissions": [
@@ -16,7 +18,7 @@
         "default_icon": {
             "48": "icons/icon48.png"
         },
-        "default_title":"Tracker Blocker"
+        "default_title": "Tracker Blocker"
     },
     "background": {
         "service_worker": "background.js"
