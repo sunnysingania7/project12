@@ -1,5 +1,3 @@
-// background.js 
-
 // Store logs in chrome.storage 
 function logBlockedTracker(domain) {
     chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
