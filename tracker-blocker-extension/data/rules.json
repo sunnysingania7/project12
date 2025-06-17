@@ -7,7 +7,7 @@
             "type": "block"
         }, 
         "condition": { 
-            "urlFilter": "google-analytics.com", 
+            "urlFilter": "||google-analytics.com", 
             "resourceTypes": ["script"]
     }
     },
@@ -18,7 +18,7 @@
             "type": "block"
         },
         "condition": {
-            "urlFilter": "facebook.net",
+            "urlFilter": "||facebook.net",
             "resourceTypes": ["script"]
         }
     },
@@ -29,7 +29,7 @@
             "type": "block"
         },
         "condition": {
-            "urlFilter": "doubleclick.net",
+            "urlFilter": "||doubleclick.net",
             "resourceTypes": ["script"]
         }
     }, 
@@ -40,7 +40,7 @@
             "type": "block"
         },
         "condition": {
-            "urlFilter": "googletagmanager.com",
+            "urlFilter": "||googletagmanager.com",
             "resourceTypes": ["script"]
         }
     }
