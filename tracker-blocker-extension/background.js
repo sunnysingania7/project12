@@ -1,25 +1,35 @@
 // background.js 
 
-// Helper: Store logs in local storage 
+// Store logs in chrome.storage 
 function logBlockedTracker(domain) {
-    chrome.storage.local.get({ logs: [] }, function (result) {
-        const logs = result.logs;
-        const newLog = {
-            tracker: domain,
-            page: "Blocked by rule", 
-            time: new Date().toLocaleString()
-        };
-        logs.push(newLog);
-        chrome.storage.local.set({ logs: logs });
+    chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+        const currentPage = tabs[0]?.url || "Unknown Page";
 
-        // Update badge 
-        chrome.action.setBadgeText({ text: logs.lenth.toString() });
-        chrome.action.setBadgeBackgroundColor({ color: "#ff0000" });
+        chrome.storage.local.get({ logs: [] }, function (result) {
+            const logs = result.logs;
+
+            logs.push({
+                tracker: domain,
+                page: currentPage,
+                time: new Date().toLocaleString()
+            });
+            chrome.storage.local.set({ logs: logs });
+            chrome.action.setBadgeText({ text: logs.length.toString() });
+            chrome.action.setBadgeBackgroundColor({ color: "#ff0000" });
+        });
     });
 }
 
-// Log once on install (optional)
+// Clear logs on install
 chrome.runtime.onInstalled.addListener(() => {
-    chrome.storage.local.set({ logs: [] }); // clear logs 
-    chrome.action.setBadgeText({ text: "" });  
+    chrome.storage.local.set({ logs: [] });
+    chrome.action.setBadgeText({ text: "" });
 });
+
+// Listen for matched rules
+if (chrome.declarativeNetRequest.onRuleMatchedDebug) {
+    chrome.declarativeNetRequest.onRuleMatchedDebug.addListener((info) => {
+        const blockedURL = info.request?.url || "Unknown Tracker";
+        logBlockedTracker(blockedURL);
+    });
+}
